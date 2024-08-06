@@ -11,7 +11,8 @@ class DataMarketplace(Blockchain):
         self.marketplace_transactions = []
 
     def list_data(self, 
-                  data_owner: str, data_hash: str, 
+                  data_owner: str, 
+                  data_hash: str, 
                   price: float):
         if self.validate_transaction({'data_owner': data_owner}):
             self.marketplace_transactions.append({
@@ -23,7 +24,8 @@ class DataMarketplace(Blockchain):
             })
 
     def purchase_data(self, 
-                      buyer: str, data_hash: str):
+                      buyer: str, 
+                      data_hash: str):
         for transaction in self.marketplace_transactions:
             if transaction['data_hash'] == data_hash and transaction['status'] == 'listed':
                 transaction['buyer'] = buyer

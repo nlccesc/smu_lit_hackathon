@@ -2,15 +2,19 @@
 
 from blockchain.blockchain import Blockchain
 from time import time
-from typing import List, Dict, Any
+from typing import (
+    List, Dict, Any, TypeVar
+)
 
+S = TypeVar('S', bound=str)
+LS = TypeVar('LS', bound=List[str])
 
 class Transactions(Blockchain):
     def create_consent_transaction(self, 
-                                   data_owner: str, 
-                                   data_elements: List[str], 
-                                   processing_activities: List[str], 
-                                   consent_given: bool) -> Dict[str, Any]:
+                                   data_owner: S, 
+                                   data_elements: LS, 
+                                   processing_activities: LS, 
+                                   consent_given: bool) -> Dict[S, Any]:
         return {
             'data_owner': data_owner,
             'data_elements': data_elements,
@@ -21,9 +25,9 @@ class Transactions(Blockchain):
         }
 
     def create_data_retention_transaction(self, 
-                                          data_hash: str, 
+                                          data_hash: S, 
                                           retention_period: int, 
-                                          deletion_action: str) -> Dict[str, Any]:
+                                          deletion_action: S) -> Dict[S, Any]:
         return {
             'data_hash': data_hash,
             'retention_period': retention_period,
@@ -33,9 +37,9 @@ class Transactions(Blockchain):
         }
 
     def create_model_training_transaction(self, 
-                                          model_id: str, 
-                                          training_data_hash: str, 
-                                          model_params_hash: str) -> Dict[str, Any]:
+                                          model_id: S, 
+                                          training_data_hash: S, 
+                                          model_params_hash: S) -> Dict[S, Any]:
         return {
             'model_id': model_id,
             'training_data_hash': training_data_hash,
@@ -45,9 +49,9 @@ class Transactions(Blockchain):
         }
 
     def create_model_decision_transaction(self, 
-                                          model_id: str, 
-                                          input_data_hash: str, 
-                                          decision_output: str) -> Dict[str, Any]:
+                                          model_id: S, 
+                                          input_data_hash: S, 
+                                          decision_output: S) -> Dict[S, Any]:
         return {
             'model_id': model_id,
             'input_data_hash': input_data_hash,
@@ -55,4 +59,5 @@ class Transactions(Blockchain):
             'timestamp': time(),
             'event_type': 'model_decision'
         }
+
 

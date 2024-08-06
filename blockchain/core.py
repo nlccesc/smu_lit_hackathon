@@ -8,10 +8,14 @@ def main():
     retention_policy = RetentionPolicy()
 
     # sample transaction
-    retention_policy.add_transaction(retention_policy.create_data_retention_transaction('data_hash_1', 10, 'delete'))
+    retention_policy.add_transaction(retention_policy.create_data_retention_transaction('data_hash_1', 
+                                                                                        10, 
+                                                                                        'delete'))
 
     # retention contract
-    retention_policy.create_retention_contract('data_hash_1', 10, 'delete')
+    retention_policy.create_retention_contract('data_hash_1', 
+                                               10, 
+                                               'delete')
 
     # Simulate waiting for some time
     time.sleep(11)
